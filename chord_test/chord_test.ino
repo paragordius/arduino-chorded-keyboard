@@ -79,6 +79,12 @@ void loop()
             } else if (chord_char == 29) {
                 //this is for return
                 chord_char_final = 40;
+            } else if (chord_char == 30) {
+                //this is for escape
+                chord_char_final = 41;
+            } else if (chord_char == 31) {
+                //this is for period
+                chord_char_final = 99;
             } else {
                 chord_char_final = chord_char + 3;
             }
