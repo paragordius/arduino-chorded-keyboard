@@ -2,11 +2,11 @@
  * copied from everywhere
  */
 
-int firstButton = 2;
-int secondButton = 3;
-int thirdButton = 4;
-int fourthButton = 5;
-int fifthButton = 6;
+int first_button = 2;
+int second_button = 3;
+int third_button = 4;
+int fourth_button = 5;
+int fifth_button = 6;
 
 int first_state_initial = 0;
 int second_state_initial = 0;
@@ -19,11 +19,11 @@ uint8_t buf[8] = {
 
 void setup() 
 {
-    pinMode(firstButton, INPUT_PULLUP);
-    pinMode(secondButton, INPUT_PULLUP);
-    pinMode(thirdButton, INPUT_PULLUP);
-    pinMode(fourthButton, INPUT_PULLUP);
-    pinMode(fifthButton, INPUT_PULLUP);
+    pinMode(first_button, INPUT_PULLUP);
+    pinMode(second_button, INPUT_PULLUP);
+    pinMode(third_button, INPUT_PULLUP);
+    pinMode(fourth_button, INPUT_PULLUP);
+    pinMode(fifth_button, INPUT_PULLUP);
   
     Serial.begin(9600);
   
@@ -35,11 +35,11 @@ void loop()
     int chord_char = 0;
     int chord_char_final = 0;
 
-    first_state_initial = digitalRead(firstButton);
-    second_state_initial = digitalRead(secondButton);
-    third_state_initial = digitalRead(thirdButton);
-    fourth_state_initial = digitalRead(fourthButton);
-    fifth_state_initial = digitalRead(fifthButton);
+    first_state_initial = digitalRead(first_button);
+    second_state_initial = digitalRead(second_button);
+    third_state_initial = digitalRead(third_button);
+    fourth_state_initial = digitalRead(fourth_button);
+    fifth_state_initial = digitalRead(fifth_button);
     
     if (first_state_initial == LOW) 
         chord_char = chord_char + 1; 
@@ -58,12 +58,12 @@ void loop()
     
     //it looks like characters start at 4 on USB  
     if (chord_char != 0) {
-        delay(50);
-        int first_state_check = digitalRead(firstButton);
-        int second_state_check = digitalRead(secondButton);
-        int third_state_check = digitalRead(thirdButton);
-        int fourth_state_check = digitalRead(fourthButton);
-        int fifth_state_check = digitalRead(fifthButton);  
+        delay(150);
+        int first_state_check = digitalRead(first_button);
+        int second_state_check = digitalRead(second_button);
+        int third_state_check = digitalRead(third_button);
+        int fourth_state_check = digitalRead(fourth_button);
+        int fifth_state_check = digitalRead(fifth_button);  
         if (first_state_check == first_state_initial &&
             second_state_check == second_state_initial &&
             third_state_check == third_state_initial &&
