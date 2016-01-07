@@ -56,9 +56,11 @@ void loop()
     if (fifth_state_initial == LOW)
         chord_char = chord_char + 16;
     
-    //it looks like characters start at 4 on USB  
     if (chord_char != 0) {
-        delay(150);
+        //the point of this block is to wait to see
+        //if additional buttons get pressed before
+        //writing the final output
+        delay(100);
         int first_state_check = digitalRead(first_button);
         int second_state_check = digitalRead(second_button);
         int third_state_check = digitalRead(third_button);
