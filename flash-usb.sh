@@ -1,6 +1,6 @@
 #!/bin/bash
 
-firmware_loaction=~/Downloads/Arduino-keyboard-0.3.hex
+firmware_location=~/Downloads/Arduino-keyboard-0.3.hex
 
 echo "Press enter after putting your Arduino into DFU-mode..."
 read
