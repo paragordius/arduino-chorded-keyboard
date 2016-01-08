@@ -14,6 +14,8 @@ int third_state_initial = 0;
 int fourth_state_initial = 0;
 int fifth_state_initial = 0;
 
+int prev_chord_char = 0;
+
 uint8_t buf[8] = { 
     0 };   /* Keyboard report buffer */
 
@@ -57,42 +59,43 @@ void loop()
         chord_char = chord_char + 16;
     
     if (chord_char != 0) {
-        delay(100);
+        delay(50);
         if (state_change() == 0) {
             switch (chord_char) {
-	    case '27':
-		//this is for space
-		chord_char_final = 44;
-		break;
-
-	    case '28':
-		//this is for backspace
-		chord_char_final = 42;
-		break;
-
-	    case '29':
-		//this is for return
-		chord_char_final = 40;
-		break;
-
-	    case '30':
-		//this is for escape
-		chord_char_final = 41;
-		break;
-
-	    case '31':
-		//this is for period
-		chord_char_final = 99;
-		break;
-
-	    default:
-		chord_char_final = chord_char + 3;
-		break;
+            case 27:
+                //this is for space
+                chord_char_final = 44;
+                break;
+            case 28:
+                //this is for backspace
+                chord_char_final = 42;
+                break;
+            case 29:
+                //this is for return
+                chord_char_final = 40;
+                break;
+            case 30:
+                //this is for escape
+                chord_char_final = 41;
+                break;
+            case 31:
+                //this is for period
+                chord_char_final = 99;
+                break;
+            default:
+                chord_char_final = chord_char + 3;
+                break;
             }
             buf[2] = chord_char_final;
-            Serial.write(buf, 8); // Send keypress
-            release_key();
-            delay(250);
+            if (chord_char_final == prev_chord_char) {
+                //delay(250);
+                prev_chord_char = 0;  
+            } else {
+                Serial.write(buf, 8); // Send keypress
+                release_key();
+                delay(50);
+                prev_chord_char = chord_char_final;
+            }
         }
     }     
 }
