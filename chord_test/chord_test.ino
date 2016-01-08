@@ -61,17 +61,7 @@ void loop()
         //if additional buttons get pressed before
         //writing the final output
         delay(100);
-        int first_state_check = digitalRead(first_button);
-        int second_state_check = digitalRead(second_button);
-        int third_state_check = digitalRead(third_button);
-        int fourth_state_check = digitalRead(fourth_button);
-        int fifth_state_check = digitalRead(fifth_button);  
-        if (first_state_check == first_state_initial &&
-            second_state_check == second_state_initial &&
-            third_state_check == third_state_initial &&
-            fourth_state_check == fourth_state_initial &&
-            fifth_state_check == fifth_state_initial) 
-            {            
+        if (state_change() == 0) {
             if (chord_char == 27) {
                 //this is for space
                 chord_char_final = 44;
@@ -93,15 +83,44 @@ void loop()
             buf[2] = chord_char_final;
             //buf[2] = chord_char + 3;
             Serial.write(buf, 8); // Send keypress
-            releaseKey();
+            release_key();
             delay(250);
         }
     }     
 }
 
-void releaseKey() 
+void release_key() 
 {
     buf[0] = 0;
     buf[2] = 0;
     Serial.write(buf, 8); // Release key  
+}
+
+int state_change()
+{
+    int first_state_check = digitalRead(first_button);
+    int second_state_check = digitalRead(second_button);
+    int third_state_check = digitalRead(third_button);
+    int fourth_state_check = digitalRead(fourth_button);
+    int fifth_state_check = digitalRead(fifth_button);  
+    if (first_state_check == first_state_initial &&
+	second_state_check == second_state_initial &&
+	third_state_check == third_state_initial &&
+	fourth_state_check == fourth_state_initial &&
+	fifth_state_check == fifth_state_initial) 
+        return 0
+    else 
+        return 1
+}
+
+int keys_held()
+{
+    if (digitalRead(first_button) == HIGH &&
+    digitalRead(second_button) == HIGH &&
+    digitalRead(third_button) == HIGH &&
+    digitalRead(fourth_button) == HIGH &&
+    digitalRead(fifth_button))
+        return 0
+    else
+        return 1
 }
