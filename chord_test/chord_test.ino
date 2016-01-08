@@ -62,23 +62,35 @@ void loop()
         //writing the final output
         delay(100);
         if (state_change() == 0) {
-            if (chord_char == 27) {
-                //this is for space
-                chord_char_final = 44;
-            } else if (chord_char == 28) {
-                //this is for backspace
-                chord_char_final = 42;
-            } else if (chord_char == 29) {
-                //this is for return
-                chord_char_final = 40;
-            } else if (chord_char == 30) {
-                //this is for escape
-                chord_char_final = 41;
-            } else if (chord_char == 31) {
-                //this is for period
-                chord_char_final = 99;
-            } else {
-                chord_char_final = chord_char + 3;
+            switch (chord_char) {
+	    case '27':
+		//this is for space
+		chord_char_final = 44;
+		break;
+
+	    case '28':
+		//this is for backspace
+		chord_char_final = 42;
+		break;
+
+	    case '29':
+		//this is for return
+		chord_char_final = 40;
+		break;
+
+	    case '30':
+		//this is for escape
+		chord_char_final = 41;
+		break;
+
+	    case '31':
+		//this is for period
+		chord_char_final = 99;
+		break;
+
+	    default:
+		chord_char_final = chord_char + 3;
+		break;
             }
             buf[2] = chord_char_final;
             Serial.write(buf, 8); // Send keypress
