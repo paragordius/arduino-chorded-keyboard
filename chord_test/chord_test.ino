@@ -130,7 +130,7 @@ int keys_held()
     digitalRead(second_button) == HIGH &&
     digitalRead(third_button) == HIGH &&
     digitalRead(fourth_button) == HIGH &&
-    digitalRead(fifth_button))
+    digitalRead(fifth_button) == HIGH)
         return 0;
     else
         return 1;
