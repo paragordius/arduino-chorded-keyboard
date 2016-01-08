@@ -57,9 +57,6 @@ void loop()
         chord_char = chord_char + 16;
     
     if (chord_char != 0) {
-        //the point of this block is to wait to see
-        //if additional buttons get pressed before
-        //writing the final output
         delay(100);
         if (state_change() == 0) {
             switch (chord_char) {
@@ -107,6 +104,9 @@ void release_key()
     Serial.write(buf, 8); // Release key  
 }
 
+//the point of this block is to wait to see
+//if additional buttons get pressed before
+//writing the final output
 int state_change()
 {
     int first_state_check = digitalRead(first_button);
