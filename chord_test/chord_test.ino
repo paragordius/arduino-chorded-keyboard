@@ -81,7 +81,6 @@ void loop()
                 chord_char_final = chord_char + 3;
             }
             buf[2] = chord_char_final;
-            //buf[2] = chord_char + 3;
             Serial.write(buf, 8); // Send keypress
             release_key();
             delay(250);
@@ -108,9 +107,9 @@ int state_change()
 	third_state_check == third_state_initial &&
 	fourth_state_check == fourth_state_initial &&
 	fifth_state_check == fifth_state_initial) 
-        return 0
+        return 0;
     else 
-        return 1
+        return 1;
 }
 
 int keys_held()
@@ -120,7 +119,7 @@ int keys_held()
     digitalRead(third_button) == HIGH &&
     digitalRead(fourth_button) == HIGH &&
     digitalRead(fifth_button))
-        return 0
+        return 0;
     else
-        return 1
+        return 1;
 }
