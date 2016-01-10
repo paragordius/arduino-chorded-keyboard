@@ -26,7 +26,8 @@ int prev_chord_char = 0;
 
 //character definitions from
 //http://www.asciitable.com/
-//in dec form
+//in dec form and from
+//https://www.arduino.cc/en/Reference/KeyboardWrite
 int case_lower[] = { 0,
     97, //a
     98,
@@ -55,9 +56,9 @@ int case_lower[] = { 0,
     121,
     122, //z
     32,  //space
-    178,   //backspace
-    176,  //return
-    177,  //escape
+    178, //backspace
+    176, //return
+    177, //escape
     46   //period
 };
 
@@ -87,12 +88,12 @@ int case_upper[] = { 0,
     87,
     88,
     89,
-    90, //Z
+    90,  //Z
     32,  //space
-    178,   //backspace
-    176,  //return
-    177,  //escape
-    46   //period
+    178, //backspace
+    176, //return
+    177, //escape
+    44   //,
 };
 
 int case_number[] = { 0,
@@ -107,29 +108,27 @@ int case_number[] = { 0,
     57, //9
     48, //0
     33, //!
-    64,
-    35,
-    36,
-    37,
-    94,
-    38,
-    42,
-    40,
+    64, //@
+    35, //#
+    36, //$
+    37, //%
+    94, //^
+    40, //(
     41, //)
+    43, //+
+    45, //-
     91, //[
-    93,
-    123,
-    125,
-    59,
-    58, //z
-    60, 
-    60,
-    62,
-    63,
-    126
+    93, //]
+    95, //_
+    126,//~
+    123,//{
+    125,//}
+    47, ///
+    63, //?
+    60, //<
+    62, //>
+    124 //|
 };
-
-//int case_high[] = { "0ABCDEFGHIJKLMNOPQRSTUVWXYZ" };
 
 int current_bank = 0;
 
@@ -147,7 +146,7 @@ void setup()
 
     digitalWrite(mode_upper_led, LOW);
     digitalWrite(mode_number_led, LOW);
-    //Serial.begin(9600);
+
     Keyboard.begin();
   
     delay(200);
@@ -218,9 +217,7 @@ void loop()
 
                 chord_char_final = chord_char;
 
-            //buf[2] = chord_char_final;
             if (chord_char_final == prev_chord_char) {
-                //delay(250);
                 prev_chord_char = 0;  
             } else {
                 switch (current_bank) {
@@ -234,20 +231,12 @@ void loop()
                     Keyboard.write(case_number[chord_char_final]);
                     break;
                 }
-                //release_key();
                 delay(50);
                 prev_chord_char = chord_char_final;
             }
         }
     }     
 }
-
-/*void release_key() 
-{
-    buf[0] = 0;
-    buf[2] = 0;
-    Serial.write(buf, 8); // Release key  
-}*/
 
 //the point of this block is to wait to see
 //if additional buttons get pressed before
@@ -268,26 +257,3 @@ int state_change()
     else 
         return 1;
 }
-
-int keys_held()
-{
-    if (digitalRead(first_button) == HIGH &&
-    digitalRead(second_button) == HIGH &&
-    digitalRead(third_button) == HIGH &&
-    digitalRead(fourth_button) == HIGH &&
-    digitalRead(fifth_button) == HIGH)
-        return 0;
-    else
-        return 1;
-}
-
-/*int toggle_upper() {
-    if (mode_current != mode_upper) {
-        mode_current = mode_upper;
-        digitalWrite(mode_upper_led, HIGH);
-    } else {
-        mode_current = mode_regular;
-        digitalWrite(mode_upper_led, LOW)l
-    }
-}*/
-
