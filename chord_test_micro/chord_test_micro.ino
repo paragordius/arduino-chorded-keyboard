@@ -91,8 +91,8 @@ int case_upper[] = { 0,
     90,  //Z
     32,  //space
     178, //backspace
-    176, //return
-    177, //escape
+    39,  //'
+    34,  //"
     44   //,
 };
 
@@ -214,9 +214,7 @@ void loop()
     if (chord_char != 0) {
         delay(50);
         if (state_change() == 0) {
-
-                chord_char_final = chord_char;
-
+            chord_char_final = chord_char;
             if (chord_char_final == prev_chord_char) {
                 prev_chord_char = 0;  
             } else {
