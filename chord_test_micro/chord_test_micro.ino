@@ -4,11 +4,14 @@
 
 #include <Keyboard.h>
 
-int first_button = 2;
-int second_button = 3;
+//I had to reverse these
+//due to hardware design
+//flaw
+int first_button = 6;
+int second_button = 5;
 int third_button = 4;
-int fourth_button = 5;
-int fifth_button = 6;
+int fourth_button = 3;
+int fifth_button = 2;
 
 int mode_upper_btn = 7;
 int mode_number_btn = 8;
@@ -212,7 +215,7 @@ void loop()
         chord_char = chord_char + 16;
     
     if (chord_char != 0) {
-        delay(50);
+        delay(40);
         if (state_change() == 0) {
             chord_char_final = chord_char;
             if (chord_char_final == prev_chord_char) {
